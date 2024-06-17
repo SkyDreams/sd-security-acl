@@ -1,7 +1,7 @@
 {
-    "name": "symfony/security-acl",
+    "name": "skydreams/security-acl",
     "type": "library",
-    "description": "Symfony Security Component - ACL (Access Control List)",
+    "description": "Symfony Security Component - ACL (Access Control List) fork - symfony 7.0 compatibile",
     "keywords": [],
     "homepage": "https://symfony.com",
     "license": "MIT",
