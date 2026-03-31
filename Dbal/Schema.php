@@ -94,9 +94,9 @@ final class Schema extends BaseSchema
         $table->addUniqueIndex(['class_id', 'object_identity_id', 'field_name', 'ace_order']);
         $table->addIndex(['class_id', 'object_identity_id', 'security_identity_id']);
 
-        $table->addForeignKeyConstraint($this->getTable($this->options['class_table_name']), ['class_id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => 'CASCADE']);
-        $table->addForeignKeyConstraint($this->getTable($this->options['oid_table_name']), ['object_identity_id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => 'CASCADE']);
-        $table->addForeignKeyConstraint($this->getTable($this->options['sid_table_name']), ['security_identity_id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => 'CASCADE']);
+        $table->addForeignKeyConstraint($this->options['class_table_name'], ['class_id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => 'CASCADE']);
+        $table->addForeignKeyConstraint($this->options['oid_table_name'], ['object_identity_id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => 'CASCADE']);
+        $table->addForeignKeyConstraint($this->options['sid_table_name'], ['security_identity_id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => 'CASCADE']);
     }
 
     /**
