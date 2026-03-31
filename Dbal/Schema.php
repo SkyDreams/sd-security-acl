@@ -116,7 +116,7 @@ final class Schema extends BaseSchema
         $table->addUniqueIndex(['object_identifier', 'class_id']);
         $table->addIndex(['parent_object_identity_id']);
 
-        $table->addForeignKeyConstraint($table, ['parent_object_identity_id'], ['id']);
+        $table->addForeignKeyConstraint($table->getName(), ['parent_object_identity_id'], ['id']);
     }
 
     /**
@@ -137,8 +137,8 @@ final class Schema extends BaseSchema
             // MS SQL Server does not support recursive cascading
             $action = 'NO ACTION';
         }
-        $table->addForeignKeyConstraint($oidTable, ['object_identity_id'], ['id'], ['onDelete' => $action, 'onUpdate' => $action]);
-        $table->addForeignKeyConstraint($oidTable, ['ancestor_id'], ['id'], ['onDelete' => $action, 'onUpdate' => $action]);
+        $table->addForeignKeyConstraint($oidTable->getName(), ['object_identity_id'], ['id'], ['onDelete' => $action, 'onUpdate' => $action]);
+        $table->addForeignKeyConstraint($oidTable->getName(), ['ancestor_id'], ['id'], ['onDelete' => $action, 'onUpdate' => $action]);
     }
 
     /**
