@@ -158,15 +158,6 @@ final class Schema extends BaseSchema
 
     private function createSchemaConfig(?Connection $connection): ?SchemaConfig
     {
-        if (null === $connection) {
-            return null;
-        }
-
-        $schemaManager = method_exists($connection, 'createSchemaManager')
-            ? $connection->createSchemaManager()
-            : $connection->getSchemaManager()
-        ;
-
-        return $schemaManager->createSchemaConfig();
+        return $connection?->createSchemaManager()->createSchemaConfig();
     }
 }

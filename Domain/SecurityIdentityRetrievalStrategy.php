@@ -13,7 +13,6 @@ namespace Symfony\Component\Security\Acl\Domain;
 
 use Symfony\Component\Security\Acl\Model\SecurityIdentityRetrievalStrategyInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface;
-use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\NullToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
@@ -48,7 +47,7 @@ class SecurityIdentityRetrievalStrategy implements SecurityIdentityRetrievalStra
         $sids = [];
 
         // add user security identity
-        if (!$token instanceof AnonymousToken && !$token instanceof NullToken) {
+        if (!$token instanceof NullToken) {
             try {
                 $sids[] = UserSecurityIdentity::fromToken($token);
             } catch (\InvalidArgumentException $e) {
@@ -78,11 +77,7 @@ class SecurityIdentityRetrievalStrategy implements SecurityIdentityRetrievalStra
 
     private function isNotAuthenticated(TokenInterface $token): bool
     {
-        if (method_exists($this->authenticationTrustResolver, 'isAuthenticated')) {
-            return !$this->authenticationTrustResolver->isAuthenticated($token);
-        }
-
-        return $this->authenticationTrustResolver->isAnonymous($token);
+        return !$this->authenticationTrustResolver->isAuthenticated($token);
     }
 
     private function addAnonymousRoles(array &$sids)
